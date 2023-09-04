@@ -3,6 +3,8 @@ import { ContextWrapper } from "./context/GlobalContext";
 import { PublicLayout } from './layout/PublicLayout';
 import { Home } from './pages/Home';
 import { Page404 } from './pages/Page404';
+import { Register } from './pages/Register';
+import { Login } from './pages/Login';
 
 function App() {
   return (
@@ -11,6 +13,8 @@ function App() {
         <Routes>
           <Route Component={PublicLayout}>
             <Route index path='/' element={<Home />}></Route>
+            <Route path='/registracija' element={<Register />}></Route>
+            <Route path='/prisijungimas' element={<Login />}></Route>
           </Route>
           <Route Component={PublicLayout}>
             <Route path='*' element={<Page404 />}></Route>
