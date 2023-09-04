@@ -1,11 +1,13 @@
 import { Outlet } from "react-router-dom";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 
 export function PublicLayout() {
     return (
         <>
-            <header>HEADER</header>
+            <Header />
             <Outlet />
-            <footer>FOOTER</footer>
+            <Footer />
         </>
     );
 }
