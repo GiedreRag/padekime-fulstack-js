@@ -168,7 +168,8 @@ export function Register() {
         <div className="container">
             <div className="row">
                 <form onSubmit={submitHandler} className="col-10 col-sm-8 col-md-6 col-lg-4 m-auto mt-3">
-                    <div className="form-floating mb-4">
+                    <h5>Nori ikelt savo istorija? Uzsiregistruok:</h5>
+                    <div className="form-floating mt-4 mb-4">
                         <input onChange={updateFullname} onBlur={isValidFullname} autoComplete="On" value={fullname} type="text" id="fullname"
                             className={`form-control ${fullnameErr ? 'is-invalid' : ''} ${fullnameValid ? 'is-valid' : ''}`} />
                         <label htmlFor="fullname">Pilnas vardas</label>
