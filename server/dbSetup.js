@@ -22,8 +22,11 @@ async function dbSetup() {
         await usersTable(connection);
         await rolesTable(connection);
         await tokensTable(connection);
+        await storiesTable(connection);
+
         await generateUsers(connection);
         await generateRoles(connection);
+        await generateStories(connection);
     }
 
     return connection;
@@ -59,7 +62,7 @@ async function tokensTable(db) {
                         PRIMARY KEY (id),
                         KEY user_id (user_id),
                         CONSTRAINT tokens_ibfk_1 FOREIGN KEY (user_id) REFERENCES users (id)
-                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci`;
+                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci`;
         await db.execute(sql);
     } catch (error) {
         console.log("Couldn't create tokens table.");
@@ -74,10 +77,33 @@ async function rolesTable(db) {
                         id int(10) NOT NULL AUTO_INCREMENT,
                         role varchar(15) NOT NULL,
                         PRIMARY KEY (id)
-                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci`;
+                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci`;
         await db.execute(sql);
     } catch (error) {
         console.log("Couldn't create roles table.");
+        console.log(error);
+        throw error;
+    }
+}
+
+async function storiesTable(db) {
+    try {
+        const sql = `CREATE TABLE stories (
+                        id int(10) NOT NULL AUTO_INCREMENT,
+                        title varchar(20) NOT NULL,
+                        story mediumtext NOT NULL,
+                        img varchar(100) NOT NULL,
+                        amount smallint(9) NOT NULL,
+                        current_amount smallint(9) NOT NULL,
+                        left_amount smallint(9) NOT NULL,
+                        user_id int(10) NOT NULL,
+                        createdAt date NOT NULL DEFAULT current_timestamp(),
+                        PRIMARY KEY (id)
+                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci`;
+                  
+        await db.execute(sql);
+    } catch (error) {
+        console.log("Couldn't create stories table.");
         console.log(error);
         throw error;
     }
@@ -98,10 +124,25 @@ async function generateUsers(db) {
     try {
         const sql = `INSERT INTO users (fullname, email, password_hash, role_id) 
                     VALUES ('Jonas Jonaitis', 'jonas@jonas.lt', '${hash('jonas@jonas.lt')}', 1),
-                     ('Ona Onaite', 'ona@ona.lt', '${hash('ona@ona.lt')}', 2);`;
+                     ('Ona Onaite', 'ona@ona.lt', '${hash('ona@ona.lt')}', 2),
+                     ('Linas Linaitis', 'linas@linas.lt', '${hash('linas@linas.lt')}', 2);`;
         await db.execute(sql);
     } catch (error) {
         console.log("Couldn't create users into a users' table.");
+        console.log(error);
+        throw error;
+    }
+}
+
+async function generateStories(db) {
+    try {
+        const sql = `INSERT INTO stories (title, story, img, amount, current_amount, left_amount, user_id) 
+                    VALUES ('Aldo istorija', 'Mazas berniukas su sunkia liga', 'img', 20000, 0, 0, 2),
+                    ('Linos istorija', 'Lina su sunkia liga', 'img', 2000, 0, 0, 3),
+                    ('Dariaus istorija', 'Berniukas su sunkia liga', 'img', 5000, 0, 0, 2);`;
+        await db.execute(sql);
+    } catch (error) {
+        console.log("Couldn't create stories into a stories' table.");
         console.log(error);
         throw error;
     }

@@ -9,6 +9,8 @@ export const initialContext = {
     updateFullname: () => { },
     email: '',
     updateEmail: () => { },
+    stories: [],
+    updateStories: () => {},
 };
 
 export const GlobalContext = createContext(initialContext);
@@ -18,6 +20,7 @@ export const ContextWrapper = (props) => {
     const [role, setRole] = useState(initialContext.role);
     const [fullname, setFullname] = useState(initialContext.fullname);
     const [email, setEmail] = useState(initialContext.email);
+    const [stories, setStories] = useState(initialContext.stories);
 
     useEffect(() => {
         fetch('http://localhost:3001/api/login', {
@@ -40,6 +43,23 @@ export const ContextWrapper = (props) => {
             .catch(console.error);
     }, []);
 
+    useEffect(() => {
+        fetch('http://localhost:3001/api/stories', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            },
+            credentials: 'include',
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'ok' && data.list) {
+                    setStories(data.list);
+                }
+            })
+            .catch(console.error);
+    }, []);
+
     function updateLoginStatus(status) {
         setLoginStatus(status);
     }
@@ -51,13 +71,16 @@ export const ContextWrapper = (props) => {
         }
     }
 
-
     function updateFullname(fullname) {
         setFullname(fullname);
     }
 
     function updateEmail(email) {
         setEmail(email);
+    }
+
+    function updateStories(stories) {
+        setStories(stories);
     }
 
     const value = {
@@ -69,6 +92,8 @@ export const ContextWrapper = (props) => {
         updateFullname,
         email,
         updateEmail,
+        stories,
+        updateStories,
     };
 
     return (

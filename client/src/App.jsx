@@ -7,6 +7,7 @@ import { Register } from './pages/Register';
 import { Login } from './pages/Login';
 import { UserLayout } from './layout/UserLayout';
 import { Account } from './pages/Account';
+import { Stories } from './pages/Stories';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           </Route>
           <Route Component={UserLayout}>
             <Route index path='/paskyra' element={<Account />}></Route>
+            <Route index path='/istorijos' element={<Stories />}></Route>
           </Route>
           <Route Component={PublicLayout}>
             <Route path='*' element={<Page404 />}></Route>

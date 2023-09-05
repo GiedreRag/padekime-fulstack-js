@@ -59,7 +59,7 @@ export function Header() {
 
                 <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                     <li><Link to="/" className="nav-link px-2 link-secondary">Pagrindinis</Link></li>
-                    <li><Link to="/" className="nav-link px-2">Visos istorijos</Link></li>
+                    <li><Link to="/registracija" className="nav-link px-2">Turi savo istorija?</Link></li>
                 </ul>
 
                 <div className="col-md-4 text-end">
