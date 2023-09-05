@@ -65,11 +65,11 @@ export function StoriesTable() {
                             </div>
                             <h3 className="fs-2 text-body-emphasis">{story.title}</h3>
                             <p>{story.story}</p>
-                            <p>Reikaling suma: € {story.amount}</p>
+                            <p>Reikalinga suma: € {story.amount}</p>
                             <p>Jau surinkta: € {story.current_amount}</p>
                             <p>Dar truksta: € {story.left_amount}</p>
-                            <p>Ideta: {formatDate(story.createdAt)}</p>
-                            <p>Noretum prisidet?</p>
+                            <p>Patalpinta: {formatDate(story.createdAt)}</p>
+                            <h6 className="mt-4">Noretum prisidet?</h6>
                             <div className="form-floating mb-4">
                                 <input onChange={updateName} onBlur={isValidName} autoComplete="Off" value={name} type="text" id="name"
                                     className={`form-control ${nameErr ? 'is-invalid' : ''} ${nameValid ? 'is-valid' : ''}`} />
