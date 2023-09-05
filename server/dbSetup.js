@@ -90,12 +90,12 @@ async function storiesTable(db) {
     try {
         const sql = `CREATE TABLE stories (
                         id int(10) NOT NULL AUTO_INCREMENT,
-                        title varchar(20) NOT NULL,
+                        title varchar(30) NOT NULL,
                         story mediumtext NOT NULL,
-                        img varchar(100) NOT NULL,
-                        amount smallint(9) NOT NULL,
-                        current_amount smallint(9) NOT NULL,
-                        left_amount smallint(9) NOT NULL,
+                        img varchar(200) NOT NULL,
+                        amount DECIMAL(10, 2) NOT NULL,
+                        current_amount DECIMAL(10, 2) NOT NULL,
+                        left_amount DECIMAL(10, 2) NOT NULL,
                         user_id int(10) NOT NULL,
                         createdAt date NOT NULL DEFAULT current_timestamp(),
                         PRIMARY KEY (id)
