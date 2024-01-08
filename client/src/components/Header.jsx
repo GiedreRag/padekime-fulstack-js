@@ -83,8 +83,8 @@ export function Header() {
                     </ul>
     
                     <div className="col-md-4 text-end">
-                        <Link to="/paskyra" className="btn btn-outline-primary me-2">Paskyra</Link>
-                        <Link onClick={logOut} className="btn btn-primary">Atsijungti</Link>
+                        <Link to="/paskyra" className="btn btn-outline-primary me-2">Prisijunkti</Link>
+                        <Link to="/registracija" className="btn btn-primary">Registruotis</Link>
                     </div>
                 </header>
             </div>
